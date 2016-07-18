@@ -10,7 +10,7 @@ Completed user stories:
 
  * [x] Required: Users can view a list of movies (title, poster image, and overview) currently playing in theaters from the Movie Database API
  * [x] Required: Views are responsive for both portrait/landscape mode
- * [] Required: Lists are fully optimized for performance with the ViewHolder pattern
+ * [x] Required: Lists are fully optimized for performance with the ViewHolder pattern
  * [] Advanced: Pull-to-refresh is added for popular stream with SwipeRefreshLayout
  * [] Advanced: Default placeholder graphic is displayed for each image during loading
  * [] Bonus: Details such as ratings, popularity, and synopsis are displayed in a separate activity
