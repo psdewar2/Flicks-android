@@ -8,7 +8,7 @@ import android.widget.ListView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.psd.flicks.models.Movie;
-import com.psd.flicks.models.MovieAdapter;
+import com.psd.flicks.adapters.MovieAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
