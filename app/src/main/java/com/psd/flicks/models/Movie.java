@@ -15,6 +15,8 @@ public class Movie {
     String backdropPath;
     String originalTitle;
     String overview;
+    double rating;
+    boolean isPopular;
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
@@ -32,11 +34,17 @@ public class Movie {
         return overview;
     }
 
+    public double getRating() { return rating; }
+
+    public boolean isPopular() { return isPopular; }
+
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.backdropPath = jsonObject.getString("backdrop_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
+        this.rating = jsonObject.getDouble("vote_average");
+        this.isPopular = this.rating >= 5;
     }
 
     //iterates through each element and converts each into movie information
