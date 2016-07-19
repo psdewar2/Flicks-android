@@ -61,7 +61,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             path = movie.getBackdropPath();
         }
-        Picasso.with(getContext()).load(path).into(viewHolder.movieImageView);
+        Picasso.with(getContext()).load(path).placeholder(R.mipmap.ic_launcher).into(viewHolder.movieImageView);
         viewHolder.tvTitle.setText(movie.getOriginalTitle());
         viewHolder.tvOverview.setText(movie.getOverview());
 
