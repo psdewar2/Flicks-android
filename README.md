@@ -15,7 +15,7 @@ Completed user stories:
  * [x] Advanced: Default placeholder graphic is displayed for each image during loading
  * [] Advanced: UI is improved through styling and coloring
  * [x] Advanced: ListView distinguishes popular movies from less popular ones
- * [] Bonus: Details such as ratings, popularity, and synopsis are displayed in a separate activity
+ * [x] Bonus: Details such as ratings, popularity, and synopsis are displayed in a separate activity
  * [] Bonus: Video posts are played in full-screen using the YouTubePlayerView
  * [] Bonus: Play icon overlay is added to popular movies to indicate that the movie trailer can be played
  * [] Bonus: Data binding support module is leveraged to bind data into one or more activity layout templates

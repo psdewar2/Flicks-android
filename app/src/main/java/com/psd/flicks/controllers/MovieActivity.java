@@ -1,13 +1,17 @@
-package com.psd.flicks;
+package com.psd.flicks.controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.psd.flicks.R;
 import com.psd.flicks.adapters.MovieAdapter;
 import com.psd.flicks.models.Movie;
 
@@ -54,6 +58,22 @@ public class MovieActivity extends AppCompatActivity {
         movies = new ArrayList<>(); //make sure to initialize before placing in adapter to prevent crashing
         movieAdapter = new MovieAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Movie movie = movies.get(position);
+                //send movie data to DetailsActivity
+                Intent i = new Intent(MovieActivity.this, DetailsActivity.class);
+                i.putExtra("movieBackdrop", movie.getBackdropPath());
+                i.putExtra("movieTitle", movie.getOriginalTitle());
+                i.putExtra("movieRating", movie.getRating());
+                i.putExtra("moviePopularity", movie.getPopularity());
+                i.putExtra("movieOverview", movie.getOverview());
+                //puts DetailsActivity on top of the stack
+                startActivity(i);
+
+            }
+        });
 
         fetchMoviesAsync();
 

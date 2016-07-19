@@ -15,6 +15,7 @@ public class Movie {
     String backdropPath;
     String originalTitle;
     String overview;
+    double popularity;
     double rating;
     boolean isPopular;
 
@@ -34,6 +35,8 @@ public class Movie {
         return overview;
     }
 
+    public double getPopularity() { return popularity; }
+
     public double getRating() { return rating; }
 
     public boolean isPopular() { return isPopular; }
@@ -43,6 +46,7 @@ public class Movie {
         this.backdropPath = jsonObject.getString("backdrop_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
+        this.popularity = jsonObject.getDouble("popularity");
         this.rating = jsonObject.getDouble("vote_average");
         this.isPopular = this.rating >= 5;
     }
