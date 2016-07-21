@@ -17,7 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controllers.DetailsActivity"></activity>
+        <activity android:name=".controllers.DetailsActivity" />
+        <activity
+            android:name=".controllers.TrailerActivity"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

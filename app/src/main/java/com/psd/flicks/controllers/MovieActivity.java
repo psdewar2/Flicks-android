@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 public class MovieActivity extends AppCompatActivity {
-    String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    String nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     private SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<Movie> movies;
@@ -62,15 +62,23 @@ public class MovieActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Movie movie = movies.get(position);
-                //send movie data to DetailsActivity
-                Intent i = new Intent(MovieActivity.this, DetailsActivity.class);
-                i.putExtra("movieBackdrop", movie.getBackdropPath());
-                i.putExtra("movieTitle", movie.getOriginalTitle());
-                i.putExtra("movieRating", movie.getRating());
-                i.putExtra("moviePopularity", movie.getPopularity());
-                i.putExtra("movieOverview", movie.getOverview());
-                //puts DetailsActivity on top of the stack
-                startActivity(i);
+
+                if (movie.isPopular()) {
+                    Intent i = new Intent(MovieActivity.this, TrailerActivity.class);
+                    i.putExtra("movieId", movie.getMovieId());
+                    startActivity(i);
+
+                } else {
+                    //send movie data to DetailsActivity
+                    Intent i = new Intent(MovieActivity.this, DetailsActivity.class);
+                    i.putExtra("movieBackdrop", movie.getBackdropPath());
+                    i.putExtra("movieTitle", movie.getOriginalTitle());
+                    i.putExtra("movieRating", movie.getRating());
+                    i.putExtra("moviePopularity", movie.getPopularity());
+                    i.putExtra("movieOverview", movie.getOverview());
+                    //puts DetailsActivity on top of the stack
+                    startActivity(i);
+                }
 
             }
         });
@@ -82,14 +90,12 @@ public class MovieActivity extends AppCompatActivity {
     public void fetchMoviesAsync() {
         //initialize http client
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, new JsonHttpResponseHandler(){
+        client.get(nowPlayingUrl, new JsonHttpResponseHandler(){
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray movieResults;
                 try {
-                    movies.clear();
-                    movieAdapter.notifyDataSetChanged();
                     movieResults = response.getJSONArray("results");
                     movies.addAll(Movie.fromJSONArray(movieResults));
                     movieAdapter.notifyDataSetChanged();

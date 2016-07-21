@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 /**
  * Created by PSD on 7/17/16.
  */
@@ -88,7 +90,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                     path = movie.getBackdropPath();
                 }
-                Picasso.with(getContext()).load(path).placeholder(R.mipmap.ic_launcher).into(mVH.movieImageView);
+                Picasso.with(getContext()).load(path).transform(new RoundedCornersTransformation(10,10)).placeholder(R.mipmap.ic_launcher).into(mVH.movieImageView);
                 mVH.tvTitle.setText(movie.getOriginalTitle());
                 mVH.tvOverview.setText(movie.getOverview());
             }

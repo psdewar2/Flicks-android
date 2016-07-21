@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class Movie {
 
+    long movieId;
     String posterPath;
     String backdropPath;
     String originalTitle;
@@ -19,12 +20,16 @@ public class Movie {
     double rating;
     boolean isPopular;
 
+    public long getMovieId() {
+        return movieId;
+    }
+
     public String getPosterPath() {
-        return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
+        return String.format("https://image.tmdb.org/t/p/w500/%s", posterPath);
     }
 
     public String getBackdropPath() {
-        return String.format("https://image.tmdb.org/t/p/w780/%s", backdropPath);
+        return String.format("https://image.tmdb.org/t/p/w1280/%s", backdropPath);
     }
 
     public String getOriginalTitle() {
@@ -42,6 +47,7 @@ public class Movie {
     public boolean isPopular() { return isPopular; }
 
     public Movie(JSONObject jsonObject) throws JSONException {
+        this.movieId = jsonObject.getLong("id");
         this.posterPath = jsonObject.getString("poster_path");
         this.backdropPath = jsonObject.getString("backdrop_path");
         this.originalTitle = jsonObject.getString("original_title");
