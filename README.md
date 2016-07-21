@@ -11,16 +11,16 @@ Completed user stories:
  * [x] Required: Users can view a list of movies (title, poster image, and overview) currently playing in theaters from the Movie Database API
  * [x] Required: Views are responsive for both portrait/landscape mode
  * [x] Required: Lists are fully optimized for performance with the ViewHolder pattern
- * [x] Advanced: Pull-to-refresh is added for popular stream with SwipeRefreshLayout
- * [x] Advanced: Default placeholder graphic is displayed for each image during loading
- * [] Advanced: UI is improved through styling and coloring
- * [x] Advanced: ListView distinguishes popular movies from less popular ones
- * [x] Bonus: Details such as ratings, popularity, and synopsis are displayed in a separate activity
- * [] Bonus: Video posts are played in full-screen using the YouTubePlayerView
- * [] Bonus: Play icon overlay is added to popular movies to indicate that the movie trailer can be played
- * [] Bonus: Data binding support module is leveraged to bind data into one or more activity layout templates
- * [] Bonus: ButterKnife annotation library is applied to reduce view boilerplate
- * [] Bonus: Rounded corners are added for the images using Picasso transformations 
+ * [x] Optional: Pull-to-refresh is added for popular stream with SwipeRefreshLayout
+ * [x] Optional: Default placeholder graphic is displayed for each image during loading
+ * [] Optional: UI is improved through styling and coloring
+ * [x] Optional: ListView distinguishes popular movies from less popular ones
+ * [x] Stretch: Details such as ratings, popularity, and synopsis are displayed in a separate activity
+ * [x] Stretch: Video posts are played in full-screen using the YouTubePlayerView
+ * [] Stretch: Play icon overlay is added to popular movies to indicate that the movie trailer can be played
+ * [] Stretch: Data binding support module is leveraged to bind data into one or more activity layout templates
+ * [] Stretch: ButterKnife annotation library is applied to reduce view boilerplate
+ * [x] Stretch: Rounded corners are added for the images using Picasso transformations 
 
 ## Video Walkthrough 
 

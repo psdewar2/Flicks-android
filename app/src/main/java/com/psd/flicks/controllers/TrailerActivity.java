@@ -48,15 +48,17 @@ public class TrailerActivity extends YouTubeBaseActivity {
 
                             @Override
                             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                                Log.d("Playing ", b + youTubeVideoKey);
+                                youTubePlayer.setFullscreen(true);
+                                youTubePlayer.loadVideo(youTubeVideoKey);
 
-                                youTubePlayer.cueVideo(youTubeVideoKey);
                                 //youTubePlayer.loadVideo(youTubeVideoKey);
                             }
 
                             @Override
                             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                                Log.e("Provider: ", provider.toString());
-                                Log.e("Play error: ", youTubeInitializationResult.toString());
+                                Log.e("Provider ", provider.toString());
+                                Log.e("Play error ", youTubeInitializationResult.toString());
                             }
                         });
                     }

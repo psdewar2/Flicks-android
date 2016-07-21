@@ -71,7 +71,7 @@ public class MovieActivity extends AppCompatActivity {
                 } else {
                     //send movie data to DetailsActivity
                     Intent i = new Intent(MovieActivity.this, DetailsActivity.class);
-                    i.putExtra("movieBackdrop", movie.getBackdropPath());
+                    i.putExtra("movieId", movie.getMovieId());
                     i.putExtra("movieTitle", movie.getOriginalTitle());
                     i.putExtra("movieRating", movie.getRating());
                     i.putExtra("moviePopularity", movie.getPopularity());

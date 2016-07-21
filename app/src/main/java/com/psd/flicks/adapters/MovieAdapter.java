@@ -78,7 +78,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         } else {
             if (type == 1) {
                 PopularViewHolder pVH = (PopularViewHolder) convertView.getTag();
-                Picasso.with(getContext()).load(movie.getBackdropPath()).placeholder(R.mipmap.ic_launcher).into(pVH.movieBackDropImageView);
+                Picasso.with(getContext()).load(movie.getBackdropPath()).transform(new RoundedCornersTransformation(10,10))
+                        .placeholder(R.mipmap.ic_launcher).into(pVH.movieBackDropImageView);
             } else {
                 MovieViewHolder mVH = (MovieViewHolder) convertView.getTag();
                 //clear out image from convertView
@@ -90,7 +91,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                     path = movie.getBackdropPath();
                 }
-                Picasso.with(getContext()).load(path).transform(new RoundedCornersTransformation(10,10)).placeholder(R.mipmap.ic_launcher).into(mVH.movieImageView);
+                Picasso.with(getContext()).load(path).transform(new RoundedCornersTransformation(10,10))
+                        .placeholder(R.mipmap.ic_launcher).into(mVH.movieImageView);
                 mVH.tvTitle.setText(movie.getOriginalTitle());
                 mVH.tvOverview.setText(movie.getOverview());
             }
