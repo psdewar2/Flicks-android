@@ -2,6 +2,9 @@ package com.psd.flicks.controllers;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -12,6 +15,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.psd.flicks.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +36,7 @@ public class DetailsActivity extends YouTubeBaseActivity {
 
         //get intent data
         long movieId = getIntent().getLongExtra("movieId", 0);
+        final String movieBackdrop = getIntent().getStringExtra("movieBackdrop");
         String movieTitle = getIntent().getStringExtra("movieTitle");
         double movieRating = getIntent().getDoubleExtra("movieRating", 5.0);
         double moviePopularity = getIntent().getDoubleExtra("moviePopularity", 1.0);
@@ -70,6 +75,10 @@ public class DetailsActivity extends YouTubeBaseActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    ImageView backdropImageView = new ImageView(getApplicationContext());
+                    ViewGroupUtils vgu = new ViewGroupUtils();
+                    vgu.replaceView(youTubePlayerView, backdropImageView);
+                    Picasso.with(getApplicationContext()).load(movieBackdrop).into(backdropImageView);
                 }
             }
         });
@@ -78,11 +87,37 @@ public class DetailsActivity extends YouTubeBaseActivity {
         tvDetailsPopularity = (TextView) findViewById(R.id.tvDetailsPopularity);
         tvDetailsOverview = (TextView) findViewById(R.id.tvDetailsOverview);
 
-        //Picasso.with(this).load(movieBackdrop).placeholder(R.mipmap.ic_launcher).into(backdropImageView);
+
         tvDetailsTitle.setText(movieTitle);
         ratingBar.setRating((float) (movieRating));
         tvDetailsPopularity.setText(String.valueOf("Popularity: " + moviePopularity));
         tvDetailsOverview.setText(movieOverview);
 
+    }
+
+    //inner class that enables replacement if trailer doesn't exist for movie
+    class ViewGroupUtils {
+
+        public ViewGroup getParent(View view) {
+            return (ViewGroup)view.getParent();
+        }
+
+        public void removeView(View view) {
+            ViewGroup parent = getParent(view);
+            if(parent != null) {
+                parent.removeView(view);
+            }
+        }
+
+        public void replaceView(View currentView, View newView) {
+            ViewGroup parent = getParent(currentView);
+            if(parent == null) {
+                return;
+            }
+            final int index = parent.indexOfChild(currentView);
+            removeView(currentView);
+            removeView(newView);
+            parent.addView(newView, index);
+        }
     }
 }

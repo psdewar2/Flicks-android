@@ -17,7 +17,7 @@ Completed user stories:
  * [x] Optional: ListView distinguishes popular movies from less popular ones
  * [x] Stretch: Details such as ratings, popularity, and synopsis are displayed in a separate activity
  * [x] Stretch: Video posts are played in full-screen using the YouTubePlayerView
- * [] Stretch: Play icon overlay is added to popular movies to indicate that the movie trailer can be played
+ * [x] Stretch: Play icon overlay is added to popular movies to indicate that the movie trailer can be played
  * [] Stretch: Data binding support module is leveraged to bind data into one or more activity layout templates
  * [] Stretch: ButterKnife annotation library is applied to reduce view boilerplate
  * [x] Stretch: Rounded corners are added for the images using Picasso transformations 

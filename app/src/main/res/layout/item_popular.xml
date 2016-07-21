@@ -12,4 +12,11 @@
         android:id="@+id/movieBackDropImageView"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/play_icon"
+        android:layout_centerInParent="true"
+        android:src="@drawable/play_icon"/>
 </RelativeLayout>

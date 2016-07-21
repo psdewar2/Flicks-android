@@ -72,6 +72,7 @@ public class MovieActivity extends AppCompatActivity {
                     //send movie data to DetailsActivity
                     Intent i = new Intent(MovieActivity.this, DetailsActivity.class);
                     i.putExtra("movieId", movie.getMovieId());
+                    i.putExtra("movieBackdrop", movie.getBackdropPath());
                     i.putExtra("movieTitle", movie.getOriginalTitle());
                     i.putExtra("movieRating", movie.getRating());
                     i.putExtra("moviePopularity", movie.getPopularity());
@@ -79,12 +80,9 @@ public class MovieActivity extends AppCompatActivity {
                     //puts DetailsActivity on top of the stack
                     startActivity(i);
                 }
-
             }
         });
-
         fetchMoviesAsync();
-
     }
 
     public void fetchMoviesAsync() {
@@ -96,6 +94,7 @@ public class MovieActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray movieResults;
                 try {
+                    movies.clear();
                     movieResults = response.getJSONArray("results");
                     movies.addAll(Movie.fromJSONArray(movieResults));
                     movieAdapter.notifyDataSetChanged();
