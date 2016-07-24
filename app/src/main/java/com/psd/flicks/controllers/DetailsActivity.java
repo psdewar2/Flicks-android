@@ -1,5 +1,6 @@
 package com.psd.flicks.controllers;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.psd.flicks.R;
+import com.psd.flicks.databinding.ActivityDetailsBinding;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -24,15 +26,11 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class DetailsActivity extends YouTubeBaseActivity {
-    //ImageView backdropImageView;
     final String YT_API_KEY = "AIzaSyABSIKEyKnWllU_7rVHcNFhvSu2EdrifkE";
-    TextView tvDetailsTitle, tvDetailsPopularity, tvDetailsOverview;
-    RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
 
         //get intent data
         long movieId = getIntent().getLongExtra("movieId", 0);
@@ -43,11 +41,23 @@ public class DetailsActivity extends YouTubeBaseActivity {
         String movieOverview = getIntent().getStringExtra("movieOverview");
         String movieTrailersUrl = "https://api.themoviedb.org/3/movie/" + movieId + "/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
+        //store binding and inflate content view (replacing setContentView`)
+        ActivityDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_details);
 
-        final YouTubePlayerView youTubePlayerView =
-                (YouTubePlayerView) findViewById(R.id.detailsBackdropImageView);
+        //no need for casting or finding view by id any longer
+        final YouTubePlayerView youTubePlayerView = binding.movieTrailer;
+        TextView tvDetailsTitle = binding.tvDetailsTitle;
+        TextView tvDetailsPopularity = binding.tvDetailsPopularity;
+        TextView tvDetailsOverview = binding.tvDetailsOverview;
+        RatingBar ratingBar = binding.ratingBar;
 
-        //widgets
+        //set values in same fashion as before when casting
+        tvDetailsTitle.setText(movieTitle);
+        ratingBar.setRating((float) (movieRating));
+        tvDetailsPopularity.setText(String.valueOf("Popularity: " + moviePopularity));
+        tvDetailsOverview.setText(movieOverview);
+
+        //retrieve JSON data from tmdb
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(movieTrailersUrl, new JsonHttpResponseHandler() {
             @Override
@@ -82,16 +92,6 @@ public class DetailsActivity extends YouTubeBaseActivity {
                 }
             }
         });
-        tvDetailsTitle = (TextView) findViewById(R.id.tvDetailsTitle);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        tvDetailsPopularity = (TextView) findViewById(R.id.tvDetailsPopularity);
-        tvDetailsOverview = (TextView) findViewById(R.id.tvDetailsOverview);
-
-
-        tvDetailsTitle.setText(movieTitle);
-        ratingBar.setRating((float) (movieRating));
-        tvDetailsPopularity.setText(String.valueOf("Popularity: " + moviePopularity));
-        tvDetailsOverview.setText(movieOverview);
 
     }
 
