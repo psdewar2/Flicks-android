@@ -21,23 +21,24 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class MovieActivity extends AppCompatActivity {
     String nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
-
-    private SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<Movie> movies;
     MovieAdapter movieAdapter;
-    ListView lvItems;
+
+    @BindView(R.id.swipeContainer) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.lvMovies) ListView lvItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
+        ButterKnife.bind(this); //this eliminates usage of finding view by id
 
-        //swipe container view
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         //setup refresh listener which triggers new data loading
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -53,10 +54,9 @@ public class MovieActivity extends AppCompatActivity {
                 android.R.color.holo_red_light,
                 android.R.color.holo_purple);
 
-        //widgets
-        lvItems = (ListView) findViewById(R.id.lvMovies);
         movies = new ArrayList<>(); //make sure to initialize before placing in adapter to prevent crashing
         movieAdapter = new MovieAdapter(this, movies);
+
         lvItems.setAdapter(movieAdapter);
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

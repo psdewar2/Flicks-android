@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 /**
@@ -24,14 +26,20 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
 
     //item_popular.xml
     public static class PopularViewHolder {
-        ImageView movieBackDropImageView;
+        @BindView(R.id.movieBackDropImageView) ImageView movieBackDropImageView;
+        public PopularViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     //item_movie.xml
     public static class MovieViewHolder {
-        ImageView movieImageView;
-        TextView tvTitle;
-        TextView tvOverview;
+        @BindView(R.id.movieImageView) ImageView movieImageView;
+        @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvOverview) TextView tvOverview;
+        public MovieViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     //constructor
@@ -63,16 +71,13 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         if (convertView == null) {
             //based on type return the correct inflated XML layout file
             if (type == 1) {
-                PopularViewHolder pVH = new PopularViewHolder();
+                //always inflate view before using it as a parameter for view holder
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_popular, parent, false);
-                pVH.movieBackDropImageView = (ImageView) convertView.findViewById(R.id.movieBackDropImageView);
+                PopularViewHolder pVH = new PopularViewHolder(convertView);
                 convertView.setTag(pVH);
             } else {
-                MovieViewHolder mVH = new MovieViewHolder();
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_movie, parent, false);
-                mVH.movieImageView = (ImageView) convertView.findViewById(R.id.movieImageView);
-                mVH.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-                mVH.tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
+                MovieViewHolder mVH = new MovieViewHolder(convertView);
                 convertView.setTag(mVH);
             }
         } else {
