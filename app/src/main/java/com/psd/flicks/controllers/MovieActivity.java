@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -31,7 +31,7 @@ public class MovieActivity extends AppCompatActivity {
     MovieAdapter movieAdapter;
 
     @BindView(R.id.swipeContainer) SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.lvMovies) ListView lvItems;
+    @BindView(R.id.rvMovies) RecyclerView rvItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +56,12 @@ public class MovieActivity extends AppCompatActivity {
 
         movies = new ArrayList<>(); //make sure to initialize before placing in adapter to prevent crashing
         movieAdapter = new MovieAdapter(this, movies);
-
-        lvItems.setAdapter(movieAdapter);
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        rvItems.setLayoutManager(new LinearLayoutManager(this));
+        rvItems.setHasFixedSize(true);
+        rvItems.setAdapter(movieAdapter);
+        movieAdapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(View itemView, int position) {
                 Movie movie = movies.get(position);
 
                 if (movie.isPopular()) {

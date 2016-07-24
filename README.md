@@ -13,7 +13,7 @@ Completed user stories:
  * [x] Required: Lists are fully optimized for performance with the ViewHolder pattern
  * [x] Optional: Pull-to-refresh is added for popular stream with SwipeRefreshLayout
  * [x] Optional: Default placeholder graphic is displayed for each image during loading
- * [] Optional: UI is improved through styling and coloring
+ * [x] Optional: UI is improved through styling and coloring
  * [x] Optional: ListView distinguishes popular movies from less popular ones
  * [x] Stretch: Details such as ratings, popularity, and synopsis are displayed in a separate activity
  * [x] Stretch: Video posts are played in full-screen using the YouTubePlayerView
