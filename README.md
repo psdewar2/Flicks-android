@@ -4,7 +4,7 @@ Flicks is movie info application for Android.
 
 Submitted by: Peyt S. Dewar II
 
-Time spent: 
+Time spent: 20 hours total 
 
 Completed user stories:
 
@@ -24,11 +24,12 @@ Completed user stories:
 
 ## Video Walkthrough 
 
-![Video Walkthrough](insert .gif file here)
+![Video Walkthrough](weekoneDemo.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
-## Notes
 
+## Notes
+Spent some time making the RecyclerView heterogenous. 
 
 ## License
 
